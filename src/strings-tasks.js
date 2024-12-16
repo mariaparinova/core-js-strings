@@ -99,7 +99,7 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   removeLeadingWhitespaces('\t\t\tHello, World! ') => 'Hello, World! '
  */
 function removeLeadingWhitespaces(value) {
-  return value.match(/^\s*(.*)/)[1];
+  return value.trimStart();
 }
 
 /**
@@ -114,7 +114,7 @@ function removeLeadingWhitespaces(value) {
  *   removeTrailingWhitespaces('\t\t\tHello, World! ') => '\t\t\tHello, World!'
  */
 function removeTrailingWhitespaces(value) {
-  return value.replace(/\s+$/, '');
+  return value.trimEnd();
 }
 
 /**
@@ -244,9 +244,10 @@ function endsWith(str, substr) {
  *   formatTime(0, 0) => "00:00"
  */
 function formatTime(minutes, seconds) {
-  return `${minutes < 10 ? `0${minutes}` : minutes}:${
-    seconds < 10 ? `0${seconds}` : seconds
-  }`;
+  const minStr = minutes > 9 ? minutes : minutes.toString().padStart(2, '0');
+  const secStr = seconds > 9 ? seconds : seconds.toString().padStart(2, '0');
+
+  return `${minStr}:${secStr}`;
 }
 
 /**
